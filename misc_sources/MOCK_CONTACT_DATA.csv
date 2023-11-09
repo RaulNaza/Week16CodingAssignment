@@ -1,4 +1,4 @@
-id,firstName,lastName,phone,email,streeAddress,city,state,zipcode
+id,firstName,lastName,phone,email,streetAddress,city,state,zipcode
 1,Zacherie,Sansbury,614-283-7777,zsansbury0@stanford.edu,6 Kedzie Hill,Columbus,Ohio,43220
 2,Annabel,Coburn,213-432-3087,acoburn1@techcrunch.com,2 Hoard Park,Los Angeles,California,90101
 3,Ashlin,Doggerell,913-664-3378,adoggerell2@microsoft.com,9199 Mayfield Avenue,Shawnee Mission,Kansas,66220

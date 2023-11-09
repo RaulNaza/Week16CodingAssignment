@@ -1,9 +1,11 @@
-//Will allow us to create a new contact
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { contactsAPI } from "../restAPI/ContactsAPI";
+import { useState } from "react";
 
-function NewContact () {
+function EditContact () {
+    const location = useLocation();
+    const userObj  = location.state;
+    const navigate = useNavigate();
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -14,64 +16,61 @@ function NewContact () {
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
 
-    const navigate = useNavigate();
 
-    useEffect(
-        () => {
-            getUser()
-        }, []
-    );
-
-    const getUser = async () => {
+    const editContact = async (e) => {
+        e.preventDefault()
+        const {id} = userObj;
         try{
-            await contactsAPI.get();
-        }
-        catch{
-            console.log('Failed getUser func.')
-        }
-    };
 
-    const addContact = async (e) => {
-        e.preventDefault();
-        try{
-            const contactObj = {
-                firstName: firstName,
-                lastName: lastName,
-                phone: phone,
-                email: email,
-                streetAddress: streetAddress,
-                city: city,
-                state: state,
-                zipcode: zipcode
+            const newObj = {
+                ...userObj,
+                firstName: firstName || userObj.firstName,
+                lastName: lastName || userObj.lastName,
+                phone: phone || userObj.phone,
+                email: email || userObj.email,
+                streetAddress: streetAddress || userObj.streetAddress,
+                city: city || userObj.city,
+                state: state || userObj.state,
+                zipcode: zipcode || userObj.zipcode
             }
-            await contactsAPI.post(contactObj);
-            navigate('/ContactList', {replace: true});
+
+            await contactsAPI.put(id,newObj);
+            navigate('/ContactList', {replace: true})
         }
         catch{
-            console.log('Failed addContact func.')
+            console.log('Failed editContact func')
         }
     }
 
+
+
+
+
+
+    console.log(userObj);
     return (
         <>
-            <h1>New Contact</h1>
-
-            <form className='new-contact-form bg-secondary-subtle'>
+            <h1>Editing {userObj.firstName} {userObj.lastName}:</h1>
+            <form className='edit-contact-form bg-secondary-subtle'>
                 <div className="section-div">
                     <label className="form-label">First Name:</label>
                     <input className="form-control" onChange={(e)=> setFirstName(e.target.value)}></input>
+                    <label className="form-label">{userObj.firstName}</label>
                 </div>
                 <div className="section-div">
                     <label className="form-label">Last Name:</label>
                     <input className="form-control" onChange={(e)=> setLastName(e.target.value)}></input>
+                    <label className="form-label">{userObj.lastName}</label>
                 </div>
                 <div className="section-div">
                     <label className="form-label">Phone:</label>
-                    <input className="form-control" onChange={(e)=> setPhone(e.target.value)} placeholder="xxx-xxx-xxxx"></input>
+                    <input className="form-control" onChange={(e)=> setPhone(e.target.value)} ></input>
+                    <label className="form-label">{userObj.phone}</label>
                 </div>
                 <div className="section-div">
                     <label className="form-label">Email:</label>
-                    <input className="form-control" onChange={(e)=> setEmail(e.target.value)}></input>
+                    <input className="form-control" onChange={(e)=> setEmail(e.target.value)} ></input>
+                    <label className="form-label">{userObj.email}</label>
                 </div>
                 <div className="section-div">
                     <p style={{fontWeight: 'bold'}}>
@@ -81,26 +80,30 @@ function NewContact () {
                         <div className="section-div">
                             <label className="form-label">Street Addres:</label>
                             <input className="form-control" onChange={(e)=> setStreetAddress(e.target.value)}></input>
+                            <label className="form-label">{userObj.streetAddress}</label>
                         </div>
                         <div className="section-div">
                             <label className="form-label">City:</label>
                             <input className="form-control" onChange={(e)=> setCity(e.target.value)}></input>
+                            <label className="form-label">{userObj.city}</label>
                         </div>
                         <div className="section-div">
                             <label className="form-label">State:</label>
                             <input className="form-control" onChange={(e)=> setState(e.target.value)}></input>
+                            <label className="form-label">{userObj.state}</label>
                         </div>
                         <div className="section-div">
                             <label className="form-label">ZipCode:</label>
                             <input className="form-control" onChange={(e)=> setZipcode(e.target.value)}></input>
+                            <label className="form-label">{userObj.zipcode}</label>
                         </div>
                     </div>
-                        <button className="form-button btn btn-dark" onClick={(e)=>addContact(e)}>Add New Contact</button>
+                        <button className="form-button btn btn-dark ms-2" onClick={(e)=>editContact(e)}>Submit</button>
                 </div>
             </form>
-
         </>
+        
     )
-};
+}
 
-export default NewContact
+export default EditContact

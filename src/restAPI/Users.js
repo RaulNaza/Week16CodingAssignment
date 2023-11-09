@@ -1,6 +1,6 @@
-const USERS_URL = 'https://retoolapi.dev/qv79BQ/users';
+const USERS_URL = 'https://retoolapi.dev/kOgfPi/users';
 
-class usersAPI {
+class UsersAPI {
 
     async get () {
         try{
@@ -61,4 +61,5 @@ class usersAPI {
         }
     }
 }
-export const usersAPI = new usersAPI();
+
+export const usersAPI = new UsersAPI();

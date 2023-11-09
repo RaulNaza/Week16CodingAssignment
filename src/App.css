@@ -27,6 +27,24 @@ li {
   text-align: start;
 }
 
+.edit-contact-form {
+    width: fit-content;
+    margin: auto;
+    border-style: solid;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: start;
+}
+
+.new-user-form {
+  width: fit-content;
+  margin: auto;
+  border-style: solid;
+  padding: 1rem;
+  border-radius: 1rem;
+  text-align: start;
+}
+
 .section-div {
   margin-bottom: 5px;
 }
@@ -43,6 +61,55 @@ label {
   margin-right: 1rem;
 }
 
-button {
+.form-div {
+  margin-bottom: 5px;
+}
+
+.form-button {
   margin-top: 1rem;
+  /* padding: 3px; */
+}
+
+th {
+  border-bottom: 1rem solid;
+  border-width: thin;
+  padding: 8px;
+}
+
+td{
+  border-width: thin;
+  padding: 8px;
+
+}
+
+.table-rows {
+  text-align: start;
+}
+
+.contact-list {
+  position: static;
+}
+
+.grid-div-parent {
+  display: flex;
+}
+
+.grid-div-child-left {
+  width: 30%;
+  float: left;
+  padding: 20px;
+  /* border: 2px solid; */
+}
+.grid-div-child-right {
+  width: 70%;
+  float: right;
+  padding: 20px;
+}
+
+#contact-edit-button {
+  margin-top: 1rem;
+}
+
+img {
+  width: 10%;
 }

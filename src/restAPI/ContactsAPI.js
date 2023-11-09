@@ -1,4 +1,4 @@
-const CONTACT_URL = 'https://retoolapi.dev/Z2mIUY/contacts';
+const CONTACT_URL = 'https://retoolapi.dev/y46gHa/contacts';
 
 class ContactAPI {
 
@@ -61,4 +61,4 @@ class ContactAPI {
         }
     }
 }
-export const contacsAPI = new ContactAPI();
+export const contactsAPI = new ContactAPI();

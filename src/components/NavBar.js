@@ -8,13 +8,13 @@ function NavBar () {
 
 
     return(
-        <div className="border bg-dark-subtle">
+        <div className="container-fluid" id="nav-div">
             <ul className="nav nav-pills justify-content-center mt-3 mb-3 fs-5">
                 <li className="nav-item">
-                    <NavLink className="nav-link" activeclassname='active' to='/'>Home</NavLink>
+                    <NavLink className="nav-link fs-4" activeclassname='active' to='/'>Home</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" activeclassname='active' to='/ThankYou'>Thank You!</NavLink>
+                    <NavLink className="nav-link fs-4" activeclassname='active' to='/ThankYou'>Thank You!</NavLink>
                 </li>
             </ul>
         </div>        

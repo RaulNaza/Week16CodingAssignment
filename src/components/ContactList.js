@@ -26,24 +26,17 @@ function ContactList() {
         }
     };
 
-    const deleteContact = async (e, id) => {
-        e.preventDefault();
-        try {
-            await contactsAPI.delete(id);
-            getUser();
-        }
-        catch {
-            console.log('Failed deleteContact func.')
-        }
-    }
-
     const handleClick = (e,userIndex) => {
         e.preventDefault();
         setSelectedUser(userIndex);
         window.scrollTo({top: 0, behavior: "smooth"});
     }
 
-
+    const handleDelete = (status) => {
+        if (status === true){
+            getUser();
+        }
+    }
 
     return (
         <div className='contact-list'>
@@ -53,13 +46,11 @@ function ContactList() {
                     <table className="contact-list-table table table-dark table-hover">
                         <thead>
                             <tr>
-                                <th className="fs-3">Contacts</th>
-                                <th>
-                                    <Link to='/NewContact'>
-                                        <button className="btn btn-light">
-                                            Add New Contact
-                                        </button>
-                                    </Link>
+                                <th className="fs-3" id="table-head">Contacts   <Link to='/NewContact'>
+                                                                    <button className="btn btn-light">
+                                                                        New Contact
+                                                                    </button>
+                                                                </Link>
                                 </th>
                             </tr>
                         </thead>
@@ -68,11 +59,8 @@ function ContactList() {
                                 users.map((user, index) => (
                                 
                                     <tr key={index}>
-                                        <td>
-                                            <button onClick={(e) => handleClick(e, index)} className="form-button btn btn-light">{user.firstName} {user.lastName}</button>
-                                        </td>
-                                        <td>
-                                            <button className="form-button btn btn-light" onClick={(e) => deleteContact(e, user.id)}>Delete</button>
+                                        <td id="left-align">
+                                            <p onClick={(e) => handleClick(e, index)} id="contact">{user.firstName} {user.lastName}</p>
                                         </td>
                                     </tr>
                                 ))
@@ -81,7 +69,7 @@ function ContactList() {
                     </table>
                 </div>
                 <div className="grid-div-child-right">
-                    <Contact contact={users[selectedUser]}></Contact>
+                    <Contact contact={users[selectedUser]} deleted={handleDelete}></Contact>
                 </div>
             </div>
         </div>

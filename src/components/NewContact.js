@@ -34,10 +34,17 @@ function NewContact () {
     const addContact = async (e) => {
         e.preventDefault();
         try{
+            let phoneNumber = '';
+            for (let i = 0; i < phone.length; i++){
+                phoneNumber += phone[i];
+                if(i === 2) phoneNumber += '-';
+                if(i === 5) phoneNumber += '-';
+            }
+
             const contactObj = {
                 firstName: firstName,
                 lastName: lastName,
-                phone: phone,
+                phone: phoneNumber,
                 email: email,
                 streetAddress: streetAddress,
                 city: city,
@@ -51,6 +58,15 @@ function NewContact () {
             console.log('Failed addContact func.')
         }
     }
+
+    const states = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+        'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+        'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri',
+        'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina',
+        'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+      ];
 
     return (
         <>
@@ -67,7 +83,7 @@ function NewContact () {
                 </div>
                 <div className="section-div">
                     <label className="form-label">Phone:</label>
-                    <input className="form-control" onChange={(e)=> setPhone(e.target.value)} placeholder="xxx-xxx-xxxx"></input>
+                    <input className="form-control" id="phone-input" onChange={(e)=> setPhone(e.target.value)} maxLength={10} placeholder="xxx-xxx-xxxx"></input>
                 </div>
                 <div className="section-div">
                     <label className="form-label">Email:</label>
@@ -88,11 +104,16 @@ function NewContact () {
                         </div>
                         <div className="section-div">
                             <label className="form-label">State:</label>
-                            <input className="form-control" onChange={(e)=> setState(e.target.value)}></input>
+                            <select className="form-select" defaultValue="placeholder" onClick={(e) => setState(e.target.value)}>
+                                <option value="placeholder" disabled>Select a state</option>
+                                {states.map((state, index) => (
+                                    <option key={index} value={state}>{state}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="section-div">
                             <label className="form-label">ZipCode:</label>
-                            <input className="form-control" onChange={(e)=> setZipcode(e.target.value)}></input>
+                            <input className="form-control" maxLength={5} onChange={(e)=> setZipcode(e.target.value)}></input>
                         </div>
                     </div>
                         <button className="form-button btn btn-dark" onClick={(e)=>addContact(e)}>Add New Contact</button>

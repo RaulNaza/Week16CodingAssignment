@@ -1,13 +1,13 @@
 //This component will allow us to view the chosen contact and also edit if needed.
 
 import { useNavigate } from "react-router-dom";
-
+import { contactsAPI } from "../restAPI/ContactsAPI";
 
 function Contact (props) {
     
     const {firstName, lastName, phone,
         email, streetAddress, city,
-        state, zipcode} = props.contact|| {};
+        state, zipcode, id} = props.contact|| {};
 
     const navigate = useNavigate();
 
@@ -15,13 +15,24 @@ function Contact (props) {
         navigate('/EditContact', {state: props.contact})
     }
 
+    const deleteContact = async (e) => {
+        e.preventDefault();
+        try {
+            await contactsAPI.delete(id);
+            props.deleted(true);
+        }
+        catch {
+            console.log('Failed deleteContact func.')
+        }
+    }
+
     return (
             props.contact === undefined? 
             (<div>
-                <p className="fs-1 fst-italic">Please Select a Contact</p>
+                <p className="fs-2 fst-italic">Please Select a Contact</p>
             </div>)
             :(<>
-                <div className="new-contact-form bg-secondary-subtle mt-5">
+                <div className="new-contact-form bg-body-tertiary mt-5">
                     <div className="section-div fs-4">
                         <label>First Name:</label>
                         {firstName}
@@ -62,7 +73,10 @@ function Contact (props) {
                         </div>
                     </div>
                 </div>
-                <button className="btn btn-dark" id="contact-edit-button" onClick={() => handleEdit()}>Edit</button>
+                <div className="btn btn-group">
+                    <button className="btn btn-dark" id="contact-edit-button" onClick={() => handleEdit()}>Edit</button>
+                    <button className="btn btn-dark" id="contact-edit-button" onClick={(e) => deleteContact(e)}>Delete</button>
+                </div>
             </>)
     )
 };

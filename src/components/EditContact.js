@@ -22,11 +22,19 @@ function EditContact () {
         const {id} = userObj;
         try{
 
+            let phoneNumber = '';
+            for (let i = 0; i < phone.length; i++){
+                // console.log(phone[i]);
+                phoneNumber += phone[i];
+                if(i === 2) phoneNumber += '-';
+                if(i === 5) phoneNumber += '-';
+            }
+
             const newObj = {
                 ...userObj,
                 firstName: firstName || userObj.firstName,
                 lastName: lastName || userObj.lastName,
-                phone: phone || userObj.phone,
+                phone: phoneNumber || userObj.phone,
                 email: email || userObj.email,
                 streetAddress: streetAddress || userObj.streetAddress,
                 city: city || userObj.city,
@@ -42,16 +50,19 @@ function EditContact () {
         }
     }
 
+    const states = [
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+        'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+        'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri',
+        'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York', 'North Carolina',
+        'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island', 'South Carolina', 'South Dakota',
+        'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+      ];
 
-
-
-
-
-    console.log(userObj);
     return (
         <>
             <h1>Editing {userObj.firstName} {userObj.lastName}:</h1>
-            <form className='edit-contact-form bg-secondary-subtle'>
+            <form className='edit-contact-form bg-body-tertiary'>
                 <div className="section-div">
                     <label className="form-label">First Name:</label>
                     <input className="form-control" onChange={(e)=> setFirstName(e.target.value)}></input>
@@ -64,7 +75,7 @@ function EditContact () {
                 </div>
                 <div className="section-div">
                     <label className="form-label">Phone:</label>
-                    <input className="form-control" onChange={(e)=> setPhone(e.target.value)} ></input>
+                    <input className="form-control" maxLength={10} onChange={(e)=> setPhone(e.target.value)} ></input>
                     <label className="form-label">{userObj.phone}</label>
                 </div>
                 <div className="section-div">
@@ -88,13 +99,17 @@ function EditContact () {
                             <label className="form-label">{userObj.city}</label>
                         </div>
                         <div className="section-div">
-                            <label className="form-label">State:</label>
-                            <input className="form-control" onChange={(e)=> setState(e.target.value)}></input>
-                            <label className="form-label">{userObj.state}</label>
+                            <label className="form-label">State: {userObj.state}</label>
+                            <select className="form-select" defaultValue="placeholder" onClick={(e) => setState(e.target.value)}>
+                                <option value="placeholder" disabled>Select a state</option>
+                                {states.map((state, index) => (
+                                    <option key={index} value={state}>{state}</option>
+                                ))}
+                            </select>
                         </div>
                         <div className="section-div">
                             <label className="form-label">ZipCode:</label>
-                            <input className="form-control" onChange={(e)=> setZipcode(e.target.value)}></input>
+                            <input className="form-control" maxLength={5} onChange={(e)=> setZipcode(e.target.value)}></input>
                             <label className="form-label">{userObj.zipcode}</label>
                         </div>
                     </div>

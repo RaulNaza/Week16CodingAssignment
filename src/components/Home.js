@@ -38,8 +38,7 @@ function Home () {
                 user.userName === inputUsername && user.password === inputPassword
             )
         )
-        console.log(validUser);
-
+        
         if(validUser){
             navigate('/ContactList');
         }else{
@@ -55,7 +54,6 @@ function Home () {
     return (
         <div className="mt-5">
             <h1>Welcome!</h1>
-            <p className="fst-italic">*You can use 'testuser' and 'testpassword' to login or create a new user*</p>
             <form className="log-in-form bg-secondary-subtle">
                 <div className="form-div">
                     <label className="form-label">Username:</label>

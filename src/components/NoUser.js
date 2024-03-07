@@ -1,6 +1,4 @@
-
-
-function NoUser () {
+function NoUser() {
 
     return (
         <div className="mt-5">
@@ -11,4 +9,4 @@ function NoUser () {
     )
 }
 
-export default NoUser
+export default NoUser;

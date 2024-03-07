@@ -1,24 +1,32 @@
-//NavBar
+import { Link, useLocation } from "react-router-dom";
 
-import { NavLink } from "react-router-dom";
+function NavBar() {
+    const path = useLocation().pathname;
 
-
-function NavBar () {
-
-
-
-    return(
+    return (
         <div className="border bg-dark-subtle">
             <ul className="nav nav-pills justify-content-center mt-3 mb-3 fs-5">
                 <li className="nav-item">
-                    <NavLink className="nav-link" activeclassname='active' to='/'>Home</NavLink>
+                    {path === "/NewContactList" ? (
+                        <span className="nav-link disabled">Home</span>
+                    ) : (
+                        <Link className="nav-link" to='/'>
+                            Home
+                        </Link>
+                    )}
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" activeclassname='active' to='/ThankYou'>Thank You!</NavLink>
+                    {path === "/NewContactList" ? (
+                        <span className="nav-link disabled">Thank You!</span>
+                    ) : (
+                        <Link className="nav-link" to='/ThankYou'>
+                            Thank You!
+                        </Link>
+                    )}
                 </li>
             </ul>
-        </div>        
-    )
-};
+        </div>
+    );
+}
 
-export default NavBar
+export default NavBar;

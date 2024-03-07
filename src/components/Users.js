@@ -1,66 +1,66 @@
-import { usersAPI } from "../restAPI/Users" 
+import { usersAPI } from "../restAPI/UsersAPI"
 import { useState, useEffect } from "react"
 
-function Users () {
+function Users() {
 
-    const [users,setUsers] = useState([]);
+    const [users, setUsers] = useState([]);
 
     useEffect(
         () => {
-            getUser()
+            getUser();
         }, []
     );
 
     const getUser = async () => {
-        try{
+        try {
             const resp = await usersAPI.get();
             setUsers(resp);
         }
-        catch{
+        catch {
             console.log('Failed getUser func.')
         }
     };
 
-    const deleteUser = async (event,id) => {
-        try{
-            event.preventDefault();
-            await usersAPI.delete(id);
-
-            getUser();
+    const deleteUser = async (user, index) => {
+        try {
+            if (index !== 0 && user.userName !== 'testuser') {
+                await usersAPI.delete(user.id);
+                getUser();
+            } else {
+                throw new Error();
+            }
+        } catch {
+            console.log(`You cannot delete this user`);
         }
-        catch{
-            console.log('Failed deleteUser func.')
-        }
-    }
-
+    };
 
     return (
         <div>
             <h1>Users Component</h1>
-                <table className="table table-dark table-hover" style={{margin: 'auto', width: '50%'}}>
-                    <thead className="text-start">
-                        <tr>
-                            <th>Id</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            users.map((user, index) => (
-                                <tr key={index} className="table-rows ">
-                                    <td>{index}</td>
-                                    <td>{user.userName}</td>
-                                    <td>{user.password}</td>
-                                    <td><button className="btn btn-light" onClick={(event) => deleteUser(event,user.id)}>Delete</button></td>
-                                </tr>
-                            ))
+            <table className="table table-dark table-hover" style={{ margin: 'auto', width: '50%' }}>
+                <thead className="text-start">
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        users.map((user, index) => (
+                            <tr key={index} className="table-rows ">
+                                <td>{user.id}</td>
+                                <td>{user.userName}</td>
+                                <td>{user.password}</td>
+                                <td><button type="button" className="btn btn-light" onClick={() => deleteUser(user, index)}>Delete</button></td>
+                            </tr>
+                        ))
                     }
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
         </div>
     )
 }
 
-export default Users
+export default Users;

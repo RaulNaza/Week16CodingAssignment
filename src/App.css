@@ -19,7 +19,7 @@ li {
 }
 
 .new-contact-form {
-  width: fit-content;
+  width: 25rem;
   margin: auto;
   border-style: solid;
   padding: 1rem;
@@ -28,16 +28,16 @@ li {
 }
 
 .edit-contact-form {
-    width: fit-content;
-    margin: auto;
-    border-style: solid;
-    padding: 1rem;
-    border-radius: 1rem;
-    text-align: start;
+  width: fit-content;
+  margin: auto;
+  border-style: solid;
+  padding: 1rem;
+  border-radius: 1rem;
+  text-align: start;
 }
 
 .new-user-form {
-  width: fit-content;
+  width: 25rem;
   margin: auto;
   border-style: solid;
   padding: 1rem;
@@ -67,7 +67,6 @@ label {
 
 .form-button {
   margin-top: 1rem;
-  /* padding: 3px; */
 }
 
 th {
@@ -76,18 +75,24 @@ th {
   padding: 8px;
 }
 
-td{
+td {
   border-width: thin;
   padding: 8px;
-
 }
 
 .table-rows {
   text-align: start;
 }
 
-.contact-list {
-  position: static;
+.contact-list-table {
+  background-color: #e2e3e5;
+  border-radius: 10px;
+}
+
+
+#contact-name:hover {
+  background-color: rgba(0, 0, 0, 0.235);
+  border-radius: 10px;
 }
 
 .grid-div-parent {
@@ -100,6 +105,7 @@ td{
   padding: 20px;
   /* border: 2px solid; */
 }
+
 .grid-div-child-right {
   width: 70%;
   float: right;
@@ -111,5 +117,5 @@ td{
 }
 
 img {
-  width: 10%;
+  width: 15%;
 }

@@ -7,7 +7,7 @@ function NavBar() {
         <div className="border bg-dark-subtle">
             <ul className="nav nav-pills justify-content-center mt-3 mb-3 fs-5">
                 <li className="nav-item">
-                    {path === "/NewContactList" ? (
+                    {path === "/ContactList" ? (
                         <span className="nav-link disabled">Home</span>
                     ) : (
                         <Link className="nav-link" to='/'>
@@ -16,7 +16,7 @@ function NavBar() {
                     )}
                 </li>
                 <li className="nav-item">
-                    {path === "/NewContactList" ? (
+                    {path === "/ContactList" ? (
                         <span className="nav-link disabled">Thank You!</span>
                     ) : (
                         <Link className="nav-link" to='/ThankYou'>

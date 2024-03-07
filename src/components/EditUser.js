@@ -25,7 +25,7 @@ function EditUser() {
 
             await usersAPI.put(id, userInfo);
             
-            navigate('/NewContactList', { replace: true, state:userObj});
+            navigate('/ContactList', { replace: true, state:userObj});
         }
         catch {
             console.log('Failed updateUser func.');
@@ -56,7 +56,7 @@ function EditUser() {
                     <input className="form-control" onChange={(event) => setPreferredName(event.target.value)}></input><br></br>
                 </div>
                 <button onClick={(event) => updateUser(event)} className="form-button btn btn-primary me-1">Update</button>
-                <button type="button"  onClick={() => navigate('/NewContactList', { replace: true, state:userObj})} className="form-button btn btn-primary ms-1">Cancel</button>
+                <button type="button"  onClick={() => navigate('/ContactList', { replace: true, state:userObj})} className="form-button btn btn-primary ms-1">Cancel</button>
             </form>
         </div>
     )

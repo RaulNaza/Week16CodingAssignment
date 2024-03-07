@@ -10,7 +10,7 @@ function NewUserContact() {
 
     const navigate = useNavigate();
 
-    const [firstName, setFirstName] = useState('');
+    const [firstName, setFirstName] = useState('No Name Provided');
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
@@ -46,7 +46,7 @@ function NewUserContact() {
             };
 
             await usersAPI.put(id, updatedUserInfo);
-            navigate('/NewContactList', { state: updatedUserInfo });
+            navigate('/ContactList', { state: updatedUserInfo });
         }
         catch {
             console.log('Failed addContact func.');
@@ -55,7 +55,7 @@ function NewUserContact() {
     };
 
     const backToContactList = () => {
-        navigate('/NewContactList', { state: userObj });
+        navigate('/ContactList', { state: userObj });
     };
 
     const handlePhone = (value) => {
